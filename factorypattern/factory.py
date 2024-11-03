@@ -6,6 +6,8 @@ class Media(ABC):
     def show_media(self) -> str:
         pass
 
+
+# create different media classes which will override the media methods
 class Dip(Media):
     def show_media(self):
         return "This is Dip Media"
@@ -18,11 +20,14 @@ class Usen(Media):
     def show_media(self):
         return "This is Usen Media"
 
+
 class MediaFactory(ABC):
 
     @abstractmethod
     def get_media(self) -> str:
         pass
+
+# create different factory classes which will return the object of the media which is required
 
 class DipFactory(MediaFactory):
     def get_media(self):

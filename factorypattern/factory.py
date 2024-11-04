@@ -30,6 +30,8 @@ class MediaFactory(ABC):
         if media_type.lower() == 'book':
             return Book()
         if media_type.lower() == 'usen':
+            return Usen()
+        else:
             raise ValueError(f"Unsupported media type: {media_type}")
 
 

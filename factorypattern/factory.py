@@ -23,33 +23,26 @@ class Usen(Media):
 
 class MediaFactory(ABC):
 
-    @abstractmethod
-    def get_media(self) -> str:
-        pass
-
-# create different factory classes which will return the object of the media which is required
-
-class DipFactory(MediaFactory):
-    def get_media(self):
-        return Dip()
-
-
-class BookFactory(MediaFactory):
-    def get_media(self):
-        return Book()
-
-class UsenFactory(MediaFactory):
-    def get_media(self):
-        return Usen()
+    @staticmethod
+    def create_media(media_type):
+        if media_type.lower() == 'dip':
+            return Dip()
+        if media_type.lower() == 'book':
+            return Book()
+        if media_type.lower() == 'usen':
+            raise ValueError(f"Unsupported media type: {media_type}")
 
 
 if __name__ == '__main__':
-    obj1 = DipFactory()
-    media1 = obj1.get_media()
-    print(media1.show_media())
-    obj2 = BookFactory()
-    media2 = obj2.get_media()
-    print(media2.show_media())
-    obj3 = UsenFactory()
-    media3 = obj3.get_media()
-    print(media3.show_media())
+    try:
+        obj1 = MediaFactory.create_media('dip')
+        print(obj1.show_media())
+        obj2 = MediaFactory.create_media('book')
+        print(obj2.show_media())
+        obj3 = MediaFactory.create_media('usen')
+        print(obj3.show_media())
+        obj4 = MediaFactory.create_media('test')
+
+    except Exception as e:
+        print(f"Error: {e}")
+
